@@ -312,11 +312,35 @@ function displayInfo(raw){
                 }
             }
             d3.appendChild(d);
+        }        
+	//team if available
+        var d4 = document.createElement('details');
+        var s4 = document.createElement('summary');
+        s4.innerHTML = `Actions`;
+        d4.appendChild(s4);
+        d4.open = true;
+        for(var i=0;i<raw.actions.length;i++){
+            var t = raw.actions[i].type;
+            var d = document.createElement('div');
+            d.innerHTML += `Action ${i}: ${actions[t].name}`;
+            console.log(raw)
+            d.className = 'listItem';
+            d.title = `${t}: ${actions[t].description}`;
+            for(j=0;j<7;j++){
+                if(actions[t].p[j]>0){
+                    if(j!=6) d.innerHTML += ` ${raw.actions[i].p[j]}`;
+                    else d.innerHTML += ` @${wp(raw.actions[i].p[j])}`;
+                }
+            }
+            d4.appendChild(d);
         }
+	    
+	    
         info.appendChild(d0);
         info.appendChild(d1);
         info.appendChild(d2);
         info.appendChild(d3);
+        info.appendChild(d4);
         /*
         var d4 = document.createElement('details');
         var s4 = document.createElement('summary');
